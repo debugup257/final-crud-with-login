@@ -1,0 +1,59 @@
+{%extends "base.html"%}
+
+{% block content %}
+
+<form method="POST" action="{{ url_for('new_user')}}">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label" name="username">Username</label>
+        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">User Type</label>
+        <input name="user_type" type="text" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <button type="submit" class="btn btn-secondary" name="create" value="create">Submit</button>
+</form>
+
+<br><br>
+
+<div>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">User Type</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in users %}
+            <TR>
+                <TD class="col">{{i[0]}}</TD>
+                <TD class="col">{{i[1]}}</TD>
+                <TD class="col">{{i[2]}}</TD>
+                <TD class="col">
+                    <form action="{{ url_for('new_user')}}"method="POST">
+                        <input type="hidden" name="username_table" value="{{i[0]}}"></input>
+                        <button type="submit" name="edit" value="edit">EDIT</button>
+                        <button type="submit" name="delete" value="delete">DELETE</button>
+                    </form>
+
+
+                </TD>
+            </TR>
+            {% endfor %}
+
+            
+
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
