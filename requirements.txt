@@ -3,3 +3,4 @@ gunicorn==19.9.0
 Jinja2
 wtforms
 psycopg2
+flask_wtf
